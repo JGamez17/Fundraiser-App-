@@ -1,6 +1,8 @@
 <h1>New Donation</h1>
 
-<%= form_for (@donation) do |f| %>
+<%= form_for @donation do |f| %>
+<%= f.label "Select Donation Amount"%>
+<%= f.collection_select :raffle_id, Raffle.all, :name_of_raffle, :id, inlcude_blank: true %>
 <%= f.label :number_of_tickets %>
 <%= f.number_field :number_of_tickets %> 
 <%= f.submit %> 

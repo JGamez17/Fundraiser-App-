@@ -6,6 +6,7 @@ class DonationsController < ApplicationController
 
     def new 
         # instantiate raffle based on params[:raffle_id]
+        @raffle = Raffle.new(params[:id])
         @donation = Donation.new
     end
 
