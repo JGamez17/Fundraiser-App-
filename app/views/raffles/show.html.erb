@@ -1,3 +1,5 @@
-<h1> test </h1>
+<h1> List of all Raffles </h1>
 
-<%= @raffle.name_of_raffle%>
+<%=link_to "Home", raffles_path%>
+<p>Raffle Prize: <%= @raffle.name_of_raffle %>
+<p>Raffle Price: <% @raffle.ticket_price %> $5
