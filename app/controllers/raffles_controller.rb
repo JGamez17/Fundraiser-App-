@@ -1,4 +1,6 @@
 class RafflesController < ApplicationController
+
+
     def index
         @raffles = Raffle.all 
     end
@@ -12,8 +14,8 @@ class RafflesController < ApplicationController
     end
 
     def create 
-        @raffle = Raffle.new(raffle_params)
-        if @raffle.save
+        @raffle = Raffle.new(raffle_params) #ActiveRecord is instaniating an object
+        if @raffle.valid? && @raffle.save
             redirect_to raffle_path(@raffle)
         else render :new
         end

@@ -1,5 +1,18 @@
 <h1>New Raffle</h1>
 
+<% if @raffle.errors.any? %>
+    <h2>
+        <%= pluralize(@raffle.errors.count, "error") %>
+        prohibted this raffle from being saved:
+    </h2>
+
+    <ul>
+    <% @raffle.errors.full_messages.each do |msg| %>    
+        <li><%= msg %></li>
+    <% end %>    
+    </ul>
+  <% end %>  
+
 <%= form_for (@raffle) do |f| %>
 <%= f.label :name_of_raffle %>
 <%= f.text_field :name_of_raffle %>
@@ -7,3 +20,7 @@
 <%= f.number_field :ticket_price %> 
 <%= f.submit %> 
 <% end %>  
+
+<style>
+    .field_with_errors > input {border: 3px solid red}
+</style>    

@@ -2,5 +2,6 @@
 
 <%=@users.each do |user| %>
 
-<%=user%>
+    <%= user.username %>
+    <%= user.password_digest %>
 <%end%>
