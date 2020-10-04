@@ -1,5 +1,10 @@
-<h1> List of all Raffles </h1>
+<h1> Donations on all Raffles </h1>
 
-<%=link_to "Home", raffles_path%>
-<p>Raffle Prize: <%= @raffle.name_of_raffle %>
-<p>Raffle Price: <% @raffle.ticket_price %> $5
+<p>
+  Number of Tickets: <%= @raffle.ticket_price %>
+</p>
+Donated by:
+  <% @raffle.donations.each do |donation| %>
+    <%=  donation.user.username %>
+  <% end %>
+  

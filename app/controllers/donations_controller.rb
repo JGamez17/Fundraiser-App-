@@ -1,4 +1,5 @@
 class DonationsController < ApplicationController 
+
     def index
        @donations = Donations.all  
     end    
@@ -25,8 +26,8 @@ class DonationsController < ApplicationController
         @donation.raffle = @raffle 
         if @donation.save
             redirect_to donation_params
-        else render :new
-        end
+         else render :new
+     end
     end
 
     private

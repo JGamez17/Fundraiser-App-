@@ -1,5 +1,5 @@
-<h3><%= @donations.raffle.name%></h3>
+<h3><%= @donation.raffles.name_of_raffle%></h3>
 
-<p>Number of Tickets: <%=@donation.number_of_tickets%></p>
-<P>Name of Raffle: <%=@donations.name_of_raffle%></p>
+<p>Number of Tickets: <%=@donation.raffle.ticket_price%></p>
+<P>Name of Raffle: <%=@donation.raffle.name_of_raffle%></p>
 <a href="<%=raffle_path(@donation.raffle)%>">Details</a>

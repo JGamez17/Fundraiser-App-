@@ -1,0 +1,6 @@
+<h2>Welcome, <%=current_user.username%>!
+
+<ul>
+    <% @donations.each do |donation| %>
+        <li>
+            <p><%=donation.raffle.%><p>

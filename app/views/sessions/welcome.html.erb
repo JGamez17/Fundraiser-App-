@@ -1,10 +1,18 @@
-<h1> In honor of Ana G </h1>
+<!DOCTYPE html>
+<html> 
+<head>
 
-<p>
-    <%= link_to "Login", login_path%>
-    or 
-    <%= link_to "Signup", signup_path %>
+<title>Home | Fundraiser App</title> </head>
 
-</p>
+<body>
+<h1>Fundraiser App</h1> <p>
+In honor of Ana G
+<a href="https://lustgarten.org/">For Pancreatic Cancer research</a> 
+
+<%= button_to "Log in with Google", '/auth/google_oauth2'%>
+
+</p> 
+</body>
+</html>
 
 
