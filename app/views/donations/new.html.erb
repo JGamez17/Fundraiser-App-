@@ -1,6 +1,6 @@
-<h1>New Donation</h1>
+<h1> Donate Now </h1>
 
-<%= form_for [@raffle, @donation] do |f| %>
+<%= form_for (@donation) do |f| %>
 <%= f.label :number_of_tickets %>
 <%= f.number_field :number_of_tickets %> 
 <%= f.submit %> 

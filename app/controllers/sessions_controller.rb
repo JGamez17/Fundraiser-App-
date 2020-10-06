@@ -22,14 +22,14 @@ class SessionsController < ApplicationController
             session[:user_id] = @user.id
             redirect_to raffles_path
         else
-            flash[:danger] = 'Invalid email/password combination' # Not quite right!
+            flash[:danger] = 'Invalid email/password combination' 
             render :new
         end
     end
 
     def destroy 
         session.clear
-        redirect_to login_path
+        redirect_to '/'#change to home page 
     end 
 
 

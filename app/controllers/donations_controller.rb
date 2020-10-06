@@ -1,36 +1,50 @@
 class DonationsController < ApplicationController 
+    # before_action :require_login
 
     def index
-       @donations = Donations.all  
-    end    
+        if params[:raffle_id] && raffle = Raffle.find_by_id(params[:raffle_id])
+          #nested route
+         @donations = raffle.donations
+        end
+    end
 
     def raffle_donation
        @donations = Donation.where(raffle_id: params[:id])
     end
 
-    def new 
-        # instantiate raffle based on params[:raffle_id]
-        @raffle = Raffle.find_by_id(params[:raffle_id])
-        @donation = Donation.new
-    end
+    def new
+        #check if it's nested & it's a proper id
+        if params[:raffle_id] && raffle = Raffle.find_by_id(params[:raffle_id])
+          #nested route
+          @donation = raffle.donations.build #has_many
+        else
+          #unnested
+          @donation = Donation.new
+          @donation.build_raffle  #belongs_to
+        end
+      end
 
     def show
-        @donation = Donation.find_by_id(params[:id])
+        set_donation   
     end
 
     def create 
-        @raffle = Raffle.find_by_id(params[:raffle_id])
-        # instantiate raffle based on params[:raffle_id]
-        # donation_params.merge(params[:raffle_id])
-        @donation = current_user.donations.new(donation_params)
-        @donation.raffle = @raffle 
+        @donation = current_user.donations.build(donation_params)
         if @donation.save
-            redirect_to donation_params
+            redirect_to donation_path(@donation)
          else render :new
-     end
+        end
     end
 
     private
+
+        def set_donation
+            @donation = Donation.find_by_id(id: params[:id])
+            if !@donation
+                redirect_to donations_path
+            end
+        end
+
         def donation_params
             params.require(:donation).permit(:number_of_tickets, raffle_attributes: %i[ticket_price])
         end

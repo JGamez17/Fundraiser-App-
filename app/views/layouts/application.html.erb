@@ -19,9 +19,10 @@
     <% end %>
     
   <br>
+    <%= link_to "Signup", '/signup' %> |
+    <%= link_to "Login", '/login' %> |
+    <%= link_to 'Logout', '/' %> |
     <%= link_to("All Raffles", raffles_path )%> |
-    <%= link_to 'Logout', logout_path %> |
-    <%= link_to "Login", '/login' %>
     <%= yield %>
   </body>
 </html>
