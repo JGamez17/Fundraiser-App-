@@ -2,10 +2,12 @@ class DonationsController < ApplicationController
     # before_action :require_login
 
     def index
-        if params[:raffle_id] && raffle = Raffle.find_by_id(params[:raffle_id])
-          #nested route
-         @donations = raffle.donations
+        if params[:raffle_id]
+            @donations = Donation.find_by_raffle_id(params[:raffle_id])
+        else
+            Donations.all
         end
+        @donations = Donation.where(raffle_id: params[:id])
     end
 
     def raffle_donation
@@ -24,16 +26,17 @@ class DonationsController < ApplicationController
         end
       end
 
-    def show
-        set_donation   
-    end
-
     def create 
-        @donation = current_user.donations.build(donation_params)
+      @donation = current_user.donations.build(donation_params)
         if @donation.save
             redirect_to donation_path(@donation)
-         else render :new
+         else 
+            render :new
         end
+    end
+
+    def show
+        set_donation   
     end
 
     private
@@ -46,6 +49,6 @@ class DonationsController < ApplicationController
         end
 
         def donation_params
-            params.require(:donation).permit(:number_of_tickets, raffle_attributes: %i[ticket_price])
+            params.require(:donation).permit(:number_of_tickets, :donation_amount, :raffle_attributes, :raffle_id)
         end
 end

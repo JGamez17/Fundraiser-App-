@@ -1,8 +1,21 @@
-<h2>Welcome</h2>, <%= current_user.username %>
+<h1>Welcome, <%= current_user.username %></h1>
 
-    <% Donations.all.each do |donation| %>
-        <h3><%= link_to raffle.name_of_raffle, donation_path(donation) %</h3>>
+Thank you for donationg to the following raffles:
 
-   
-        <%# <li>
-            <p><%= donation.raffle %><p> %>
+<h3>List of Donations Made:</h3>
+
+<%# <table>
+  <tr>
+    <th>Donation Amount</th>
+    <th>Text</th>
+    <th></th>
+  </tr> %>
+
+  <% @donations.each do |donation| %>
+    <tr>
+      <td><%= donations.number_of_tickets %></td>
+      <td><%= donations.donation_amount %></td>
+      <td><%= link_to 'New Donation', donation_path(donation) %></td>
+    </tr>
+  <% end %>
+</table>

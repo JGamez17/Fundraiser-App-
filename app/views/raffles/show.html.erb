@@ -1,6 +1,9 @@
+<%=link_to "Homepage", raffles_path%>
 <h1> Welcome, </h1><%= current_user.username %> 
 has donated to the following raffles:
 
 <h3><%= @raffle.name_of_raffle %></h3>
+<p>Ticket Price: <%=@raffle.ticket_price%></p>
 
+<%=link_to "View All Donations", raffle_donations_path(@raffle)%>
 
