@@ -4,12 +4,12 @@ class RafflesController < ApplicationController
         @raffles = Raffle.all 
     end
 
-    def new 
-        @raffle = Raffle.new
+    def show
+        set_raffle
     end
 
-    def show
-        @raffle = Raffle.find_by_id(params[:id])
+    def new 
+        @raffle = Raffle.new
     end
 
     def create 
@@ -21,11 +21,11 @@ class RafflesController < ApplicationController
     end
 
     def edit 
-        @raffle = Raffle.find_by_id(params[:id])
+        set_raffle
     end
 
     def update
-        @raffle = Raffle.find_by_id(params[:id])
+        set_raffle
         if @raffle.update(raffle_params)
              redirect_to raffle_path(@raffle)
         else render :edit
@@ -33,16 +33,18 @@ class RafflesController < ApplicationController
     end
 
     def destroy 
-        @raffle = Raffle.find_by_id(params[:id])
-        if @raffle.delete 
-            redirect_to "homepage"
-        else redirect_to raffle_path(@raffle)
-        end
+        set_raffle
+        @raffle.destroy
+        redirect_to raffles_path
     end
 
     private
         def raffle_params
             params.require(:raffle).permit(:ticket_price, :name_of_raffle)
+        end
+
+        def set_raffle
+            @raffle = Raffle.find_by_id(params[:id])
         end
 
 end

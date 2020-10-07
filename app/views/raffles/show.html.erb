@@ -1,9 +1,6 @@
-<%=link_to "Homepage", raffles_path%>
-<h1> Welcome, </h1><%= current_user.username %> 
-has donated to the following raffles:
+<%=link_to "Home", raffle_path%>
+<p>Number of Tickets: <%=@raffle.ticket_price%></p>
+<P>Name of Raffle: <%=@raffle.name_of_raffle%></p>
 
-<h3><%= @raffle.name_of_raffle %></h3>
-<p>Ticket Price: <%=@raffle.ticket_price%></p>
-
-<%=link_to "View All Donations", raffle_donations_path(@raffle)%>
-
+<%=link_to "Edit", edit_raffle_path(@raffle) %>
+<%=link_to "Delete", raffle_path(@raffle), method: :delete %>
