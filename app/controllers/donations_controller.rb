@@ -10,26 +10,21 @@ class DonationsController < ApplicationController
         @donations = Donation.where(raffle_id: params[:id])
     end
 
-    def raffle_donation
-       @donations = Donation.where(raffle_id: params[:id])
-    end
+    # def raffle_donation
+    #    @donations = Donation.where(raffle_id: params[:id])
+    # end
 
     def new
-        #check if it's nested & it's a proper id
-        if params[:raffle_id] && raffle = Raffle.find_by_id(params[:raffle_id])
-          #nested route
-          @donation = raffle.donations.build #has_many
-        else
-          #unnested
-          @donation = Donation.new
-          @donation.build_raffle  #belongs_to
-        end
-      end
+        # byebug
+     @donation = Donation.new
+    end
 
-    def create 
-      @donation = current_user.donations.build(donation_params)
+    def create #all donations will be made through nested routes 
+      @donation = Donation.new(donation_params)
+      @donation.user_id = current_user.id
+   
         if @donation.save
-            redirect_to donation_path(@donation)
+           redirect_to raffle_path(params[:donation][:raffle_id])
          else 
             render :new
         end
@@ -49,6 +44,6 @@ class DonationsController < ApplicationController
         end
 
         def donation_params
-            params.require(:donation).permit(:number_of_tickets, :donation_amount, :raffle_attributes, :raffle_id)
+            params.require(:donation).permit(:number_of_tickets, :donation_amount, :donation_frequency, :raffle_id)
         end
 end

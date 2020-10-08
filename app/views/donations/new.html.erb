@@ -2,17 +2,15 @@
 
 <h3>Please select from raffles below to donate:</h3>
 
-<%= form_with model: @raffle do |raffle_form| %>
-  <%= raffle_form.collection_select(:raffile_id, Raffle.all, :id, :name_of_raffle) %>
-<% end %>
-
-<br>
 <br>
 
 <%= form_for (@donation) do |f| %>
+<%= f.hidden_field :raffle_id, value: params[:raffle_id]%>
 <%= f.label :number_of_tickets %>
 <%= f.number_field :number_of_tickets %> 
 <%= f.label :donation_amount %>
+<%= f.number_field :donation_amount %> 
+<%= f.label :donation_frequency %>
 <%= f.number_field :donation_frequency %> 
 <%= f.submit %> 
 

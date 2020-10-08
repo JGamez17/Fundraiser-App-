@@ -33,15 +33,7 @@ class UsersController < ApplicationController
         else render :edit
         end
     end
-
-    def destroy 
-        @user = User.find_by_id(params[:id])
-        if @user.delete 
-            redirect_to "homepage"
-        else redirect_to user_path(@user)
-        end
-    end
-
+    
     private
 
         def user_params

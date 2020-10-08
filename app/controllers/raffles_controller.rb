@@ -6,6 +6,7 @@ class RafflesController < ApplicationController
 
     def show
         set_raffle
+        @donations = @raffle.donations 
     end
 
     def new 
@@ -46,5 +47,4 @@ class RafflesController < ApplicationController
         def set_raffle
             @raffle = Raffle.find_by_id(params[:id])
         end
-
 end

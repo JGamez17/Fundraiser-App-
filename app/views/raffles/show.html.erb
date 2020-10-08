@@ -1,6 +1,19 @@
 <%=link_to "Home", raffle_path%>
+<a href="/donations/new">Make a donation</a>
 <p>Number of Tickets: <%=@raffle.ticket_price%></p>
 <P>Name of Raffle: <%=@raffle.name_of_raffle%></p>
 
+
+<% if @donations%>
+<ul>
+    <% @donations.each do |donation|%>
+    <li> <%= donation.donation_amount%> </li>
+    <%end%>
+</ul>    
+<%end%>
+
 <%=link_to "Edit", edit_raffle_path(@raffle) %>
 <%=link_to "Delete", raffle_path(@raffle), method: :delete %>
+
+<br>
+<%=link_to "Make a donation for this raffle", new_raffle_donation_path(@raffle) %>

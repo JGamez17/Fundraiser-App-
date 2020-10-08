@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get '/'=> 'sessions#welcome'
-  get '/home' => 'static#home'
+  # get '/home' => 'static#home'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  post '/logout', to: 'sessions#destroy'
 
   get '/raffles/:id/donations', to: 'donations#raffle_donation'
 
