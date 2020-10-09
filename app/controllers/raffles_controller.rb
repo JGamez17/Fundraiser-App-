@@ -16,7 +16,7 @@ class RafflesController < ApplicationController
     def create 
         @raffle = Raffle.new(raffle_params) #ActiveRecord is instaniating an object
         if @raffle.valid? && @raffle.save
-            redirect_to raffle_path(@raffle)
+            redirect_to raffles_path(@raffle)
         else render :new
         end
     end

@@ -28,9 +28,8 @@ class SessionsController < ApplicationController
     end
 
     def destroy 
-        # byebug
         session.clear
-        redirect_to '/' #change to home page 
+        redirect_to '/' 
     end 
 
 

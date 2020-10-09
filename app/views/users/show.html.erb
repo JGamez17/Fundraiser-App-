@@ -1,9 +1,11 @@
 <h1>Welcome <%=@user.username %></h1>
 
-<h2><%= current_user.username %> </h2> has donated to the following raffles:
+<h3> Thank you for donating! <h3>
+
+ You have donated to the following raffles:
  
 <% @user.raffles.each do |raffle| %>
-  <%= link_to raffle.name_of_raffle, raffle_path(raffle) %>
+  <p><%= link_to raffle.name_of_raffle, raffle_path(raffle) %></p>
 <% end %>
 
 

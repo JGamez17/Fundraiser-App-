@@ -1,11 +1,11 @@
 class DonationsController < ApplicationController 
-    # before_action :require_login
+    before_action :current_user
 
     def index
         if params[:raffle_id]
             @donations = Donation.find_by_raffle_id(params[:raffle_id])
         else
-            Donations.all
+            @donations = Donation.all
         end
         @donations = Donation.where(raffle_id: params[:id])
     end
@@ -15,16 +15,13 @@ class DonationsController < ApplicationController
     # end
 
     def new
-        # byebug
      @donation = Donation.new
     end
 
     def create #all donations will be made through nested routes 
-      @donation = Donation.new(donation_params)
-      @donation.user_id = current_user.id
-   
+      @donation = @user.donations.build(donation_params)
         if @donation.save
-           redirect_to raffle_path(params[:donation][:raffle_id])
+           redirect_to user_path(@user)
          else 
             render :new
         end
@@ -35,7 +32,6 @@ class DonationsController < ApplicationController
     end
 
     private
-
         def set_donation
             @donation = Donation.find_by_id(id: params[:id])
             if !@donation
