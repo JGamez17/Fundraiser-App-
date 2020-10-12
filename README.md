@@ -1,24 +1,37 @@
-# README
+# Fundraiser App 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app was created to fundraise for Pancreatiac Cancer. The app allows users to signup, login, view different raffles and make a donation to a raffle of their choice. 
 
-Things you may want to cover:
+##Tech Framework
 
-* Ruby version
+Gems included in this project are:
 
-* System dependencies
+- gem 'byebug'
 
-* Configuration
+- gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
-* Database creation
+- gem 'sqlite3', '~> 1.4'
 
-* Database initialization
+- gem 'puma', '~> 4.1'
 
-* How to run the test suite
+- gem 'sass-rails', '>= 6'
 
-* Services (job queues, cache servers, search engines, etc.)
+- gem 'bcrypt'
 
-* Deployment instructions
+- gem 'dotenv'
 
-* ...
+- gem 'omniauth-google-oauth2'
+
+- gem 'dotenv-rails'
+
+- gem 'omniauth'
+
+- gem 'omniauth-rails_csrf_protection'
+
+
+Program's database consists of 3 tables and relationships are set as follows: - Users (has many donations through raffles, has many donations) - Raffles (has many users through donations, has many donations) - Donations (belong to a user, belong to a raffle)
+
+Program utilizes nested routes and forms to streamline and speed up data entry. Effort has been made to make the code dry through the use of reusable methods.
+
+To use the program after downloading it, make sure to run bundle install, run migrations and then run the server. 
+
