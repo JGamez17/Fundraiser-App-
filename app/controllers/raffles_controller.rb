@@ -1,11 +1,12 @@
 class RafflesController < ApplicationController
+    before_action :require_login, except: [:index]
+    before_action :set_raffle, only: [:show, :edit, :update, :destroy]
 
     def index
         @raffles = Raffle.all 
     end
 
     def show
-        set_raffle
         @donations = @raffle.donations 
     end
 
@@ -17,24 +18,22 @@ class RafflesController < ApplicationController
         @raffle = Raffle.new(raffle_params) #ActiveRecord is instaniating an object
         if @raffle.valid? && @raffle.save
             redirect_to raffles_path(@raffle)
-        else render :new
+        else 
+            render :new
         end
     end
 
-    def edit 
-        set_raffle
-    end
+    def edit;end
 
     def update
-        set_raffle
         if @raffle.update(raffle_params)
              redirect_to raffle_path(@raffle)
-        else render :edit
+        else 
+            render :edit
         end
     end
 
     def destroy 
-        set_raffle
         @raffle.destroy
         redirect_to raffles_path
     end
@@ -47,4 +46,5 @@ class RafflesController < ApplicationController
         def set_raffle
             @raffle = Raffle.find_by_id(params[:id])
         end
+        
 end
