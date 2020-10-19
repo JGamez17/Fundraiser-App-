@@ -20,6 +20,7 @@ class DonationsController < ApplicationController
 
     def create #all donations will be made through nested routes 
       @donation = @user.donations.build(donation_params)
+    #   byebug
         if @donation.save
            redirect_to user_path(@user)
          else 

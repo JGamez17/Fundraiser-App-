@@ -3,22 +3,26 @@ class RafflesController < ApplicationController
     before_action :set_raffle, only: [:show, :edit, :update, :destroy]
 
     def index
-        @raffles = Raffle.all 
+        if params[:search]
+            @raffles = Raffle.search(params[:search])
+        else
+            @raffles = Raffle.all
+        end
     end
 
     def show
-        @donations = @raffle.donations 
+        @donations = @raffle.donations
     end
 
-    def new 
+    def new
         @raffle = Raffle.new
     end
 
-    def create 
+    def create
         @raffle = Raffle.new(raffle_params) #ActiveRecord is instaniating an object
         if @raffle.valid? && @raffle.save
             redirect_to raffles_path(@raffle)
-        else 
+        else
             render :new
         end
     end
@@ -28,23 +32,23 @@ class RafflesController < ApplicationController
     def update
         if @raffle.update(raffle_params)
              redirect_to raffle_path(@raffle)
-        else 
+        else
             render :edit
         end
     end
 
-    def destroy 
+    def destroy
         @raffle.destroy
         redirect_to raffles_path
     end
 
     private
         def raffle_params
-            params.require(:raffle).permit(:ticket_price, :name_of_raffle)
+            params.require(:raffle).permit(:ticket_price, :name_of_raffle, :search)
         end
 
         def set_raffle
             @raffle = Raffle.find_by_id(params[:id])
         end
-        
+
 end

@@ -14,21 +14,31 @@
     <td>Name:</td>
     <td>Price:</td>
 </tr>
-
+<br>
     <h2>The Raffle List</h2>
+
+    <h4>Search by Raffle:</h4>
+      <%= form_tag(raffles_path, method: :get) do %>
+        <%= text_field_tag(:search, params[:search]) %>
+        <%= submit_tag 'search', name: nil %> 
+    <% end %>  
+<br>
     <table border=3>
     <ul>
  
       <% @raffles.each do |raffle| %>
         <tr>
           <td><%=raffle.name_of_raffle%></td>
-          <td><%= raffle.ticket_price %></td>
+          <td><%=raffle.ticket_price%></td>
           <td><%= link_to 'show', raffle %></td>
       <% end %>
        </tr>
     </ul>  
       </tbody>
 </table>
+
+    
+
  
     <div class="footer">
       <p>All donations will go to the Lustgarten Foundation!</p>

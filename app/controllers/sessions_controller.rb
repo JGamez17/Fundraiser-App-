@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-#loggin a user in, loggin a user out, omniauth
     def welcome
     end
     

@@ -2,6 +2,19 @@
 
 <br>
 
+<% if @donation.errors.any? %>
+    <h2>
+        <%= pluralize(@donation.errors.count, "error") %>
+        prohibted this donation from being saved:
+    </h2>
+
+    <ul>
+    <% @donation.errors.full_messages.each do |msg| %>    
+        <li><%= msg %></li>
+    <% end %>    
+    </ul>
+  <% end %>  
+
 <%= form_for (@donation) do |f| %>
 <%= f.hidden_field :raffle_id, value: params[:raffle_id]%>
 <%= f.label :number_of_tickets %>
